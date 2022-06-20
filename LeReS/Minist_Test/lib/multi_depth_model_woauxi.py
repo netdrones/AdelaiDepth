@@ -25,6 +25,7 @@ class DepthModel(nn.Module):
     def __init__(self, encoder):
         super(DepthModel, self).__init__()
         backbone = network.__name__.split('.')[-1] + '.' + encoder
+        print(backbone)
         self.encoder_modules = get_func(backbone)()
         self.decoder_modules = network.Decoder()
 
