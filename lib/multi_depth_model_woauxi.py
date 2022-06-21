@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 from . import network_auxi as network
-from net_tools import get_func
+from .net_tools import get_func
 
 class RelDepthModel(nn.Module):
     def __init__(self, backbone='resnet50'):
@@ -25,8 +25,7 @@ class DepthModel(nn.Module):
     def __init__(self, encoder):
         super(DepthModel, self).__init__()
         backbone = network.__name__.split('.')[-1] + '.' + encoder
-        print(backbone)
-        self.encoder_modules = get_func(backbone)()
+        self.encoder_modules = network.resnext101_stride32x8d()
         self.decoder_modules = network.Decoder()
 
     def forward(self, x):
